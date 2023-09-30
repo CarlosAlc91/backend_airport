@@ -1,0 +1,21 @@
+#creacion de una imagen de docker
+
+version: '3'
+
+services:
+  db:
+    image: postgres:15.4
+    restart: always
+    ports:
+      - "5435:5432"
+    environment:
+    #para llamar las variables de entorno se usa ${} y solo se pone ele nombre de la varible
+      POSTGRES_PASSWORD: ${DB_PASSWORD} 
+      POSTGRES_DB: ${DB_NAME}
+    container_name: ${DB_NAME}
+    #guardar data, son el volumen la data no se guarda, info que vaya creando en la db.
+    volumes:
+      - ./postgres-db:/var/lib/postgresql/data/
+
+#una vez creada la imagen, en la terminal se da el siguiente comando
+# docker-compose up
