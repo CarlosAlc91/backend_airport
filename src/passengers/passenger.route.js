@@ -3,7 +3,7 @@ import { Router } from "express"
 import {
   findAllPassengers,
   createPassesnger,
-  finsPassengerById,
+  findPassengerById,
   updatePassenger,
   deletePassenger,
 } from "./passenger.controller.js"
@@ -17,7 +17,7 @@ router
 
 router
   .route("/passengers/:id/")
-  .get(finsPassengerById)
+  .get(findPassengerById)
   .patch(updatePassenger)
   .delete(deletePassenger);
 

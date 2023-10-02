@@ -1,4 +1,4 @@
-import { PassengerService } from './passenger.service.js'
+import { PassengerService } from './passengers.service.js'
 
 /* instancia de la clase PassengerService */
 const passengerService = new PassengerService()
@@ -29,7 +29,7 @@ export const createPassesnger = async (req, res) => {
 }
 
 //3. find a passenger by id
-export const finsPassengerById = (req, res) => {
+export const findPassengerById = (req, res) => {
   const { id } = req.params
 
   res.json({

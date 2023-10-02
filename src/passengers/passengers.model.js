@@ -1,9 +1,9 @@
 import { DataTypes } from "sequelize"
 import sequelize from "../config/database/database.js"
-
+/* Aqui estamos creando a un pasajero */
 //los modelos van con p mayuscula, asi sabemos que e un modelo
 /* tabla = entidad */
-const Passenger = sequelize.define("passenger", {
+const Passenger = sequelize.define("passenger", {/*  */
   /* propiedades */
   id: {
     primaryKey: true,
@@ -21,12 +21,12 @@ const Passenger = sequelize.define("passenger", {
   name: {
     /* aqui asignamos un varchar */
     type: DataTypes.STRING(100),
-    allowNull: false,
+    /*  allowNull: false, */
     /* como es el mosmo nkombre no se pone el field */
   },
   surname: {
     type: DataTypes.STRING(100),
-    allowNull: false,
+    /* allowNull: false, */
   },
   birthdate: {
     type: DataTypes.DATE,
@@ -46,11 +46,7 @@ const Passenger = sequelize.define("passenger", {
     type: DataTypes.STRING(20),
     allowNull: false,
   },
-  /* status: {
-    type: DataTypes.BOOLEAN,
-    allowNull: false,
-  }, */
-  /* llave foranea */
+
   createdBy: {
     type: DataTypes.INTEGER,
     allowNull: false,
