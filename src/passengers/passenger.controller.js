@@ -29,23 +29,36 @@ export const createPassesnger = async (req, res) => {
 }
 
 //3. find a passenger by id
-export const findPassengerById = (req, res) => {
-  const { id } = req.params
+export const findPassengerById = async (req, res) => {
+  try {
+    const { id } = req.params
 
-  res.json({
-    message: "this endpoint will find a passenger by an id",
-    id: id,
-  })
+    const passenger = await passengerService.findOnePassenger(id)
+
+    if (!passenger) {
+      return res.status(404).json({
+        status: "error"
+      })
+    }
+
+    return res.json(passenger)
+
+  } catch (error) {
+    return res.status(500).json(error)
+  }
 }
 
 //4. update passenger
-export const updatePassenger = (req, res) => {
-  const { id } = req.params
+export const updatePassenger = async (req, res) => {
+  try {
+    const { id } = req.params
 
-  res.json({
-    message: "This endpoint updates an user",
-    id,
-  })
+    const passenger = await passengerService.updatePassenger(id)
+
+    res.json(passenger)
+  } catch (error) {
+    return res.status(500).json(error)
+  }
 }
 
 //5. delete passenger
@@ -57,3 +70,6 @@ export const deletePassenger = (req, res) => {
     id,
   })
 }
+
+
+/* clase 8 22:00 */
