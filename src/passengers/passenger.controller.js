@@ -73,13 +73,30 @@ export const updatePassenger = async (req, res) => {
 }
 
 //5. delete passenger
-export const deletePassenger = (req, res) => {
-  const { id } = req.params
+export const deletePassenger = async (req, res) => {
 
-  res.json({
-    message: "this endpoint will delete a passenger",
-    id,
-  })
+
+  try {
+    const { id } = req.params
+
+    /* get passsenger by id */
+    const passenger = await passengerService.findOnePassenger(id)
+
+    /* validate if passsenger exists */
+    if (!passenger) {
+      return res.status(404).json({
+        status: 'error',
+        message: `passenger with id ${id} not found ⚠️`
+      })
+    }
+
+    /* regeso del passenger eliminado */
+    await passengerService.deletePassenger(passenger)
+
+    return res.status(204).json(null)
+  } catch (error) {
+    return res.status(500).json(error)
+  }
 }
 
 
