@@ -33,16 +33,16 @@ export const findPassengerById = async (req, res) => {
   try {
     const { id } = req.params
 
-    const passenger = await passengerService.findOnePassenger(id)
+    const passanger = await passengerService.findOnePassenger(id)
 
-    if (!passenger) {
+    if (!passanger) {
       return res.status(404).json({
-        status: "error"
+        status: "error",
+        message: `passenger with ${id} not found ⚠️`
       })
     }
 
-    return res.json(passenger)
-
+    res.json(passanger)
   } catch (error) {
     return res.status(500).json(error)
   }
@@ -50,12 +50,23 @@ export const findPassengerById = async (req, res) => {
 
 //4. update passenger
 export const updatePassenger = async (req, res) => {
+
   try {
     const { id } = req.params
 
-    const passenger = await passengerService.updatePassenger(id)
+    const passenger = await passengerService.findOnePassenger(id)
 
-    res.json(passenger)
+    if (!passenger) {
+      return res.status(404).json({
+        status: 'error',
+        message: `passenger with id ${id} not found ⚠️`
+      })
+    }
+
+    const passengerUpdated = await passengerService.updatePassenger(passenger, req.body)
+
+    return res.json(passengerUpdated)
+
   } catch (error) {
     return res.status(500).json(error)
   }

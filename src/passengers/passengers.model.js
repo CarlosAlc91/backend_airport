@@ -21,12 +21,12 @@ const Passenger = sequelize.define("passenger", {/*  */
   name: {
     /* aqui asignamos un varchar */
     type: DataTypes.STRING(100),
-    /*  allowNull: false, */
+    allowNull: false,
     /* como es el mosmo nkombre no se pone el field */
   },
   surname: {
     type: DataTypes.STRING(100),
-    /* allowNull: false, */
+    allowNull: false,
   },
   birthdate: {
     type: DataTypes.DATE,
