@@ -11,12 +11,12 @@ import {
 export const router = Router()
 
 router
-  .route("/passengers")
+  .route("/")
   .get(findAllPassengers)
   .post(createPassesnger)
 
 router
-  .route("/passengers/:id/")
+  .route("/:id/")
   .get(findPassengerById)
   .patch(updatePassenger)
   .delete(deletePassenger);
