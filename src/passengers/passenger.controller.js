@@ -1,3 +1,5 @@
+import { date } from 'zod'
+import { validatePassenger } from './passengers.schema.js'
 import { PassengerService } from './passengers.service.js'
 
 /* instancia de la clase PassengerService */
@@ -20,7 +22,18 @@ export const createPassesnger = async (req, res) => {
   /* const passanger = req.body */
   /* aqui se pueden crear los datos, pasajero */
   try {
-    const passanger = await passengerService.createPassenger(req.body)
+
+    const { hasErrror, errorMessage, passengerData } = validatePassenger(req.body)
+
+    if (hasErrror) {
+      return res.status(422).json({
+        status: 'error',
+        message: errorMessage
+      })
+    }
+
+
+    const passanger = await passengerService.createPassenger(passengerData)
     /* siempre a las respuestas se les pone un return, cuando se tienen 2 res en el mismo ciclo la app va a fallar porque no se pueden enviar 2 al mismo tiemopo */
     return res.status(201).json(passanger)
   } catch (error) {
@@ -100,4 +113,4 @@ export const deletePassenger = async (req, res) => {
 }
 
 
-/* clase 8 1:10 */
+/* clase 9 1:35 */

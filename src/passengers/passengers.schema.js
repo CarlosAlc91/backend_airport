@@ -5,7 +5,7 @@ import z from 'zod'
 
 export const passengerSchema = z.object({
   /* validame que sea string y tenga un minimo de 8 caracters y maximo de 10 caracteres */
-  nroPassport: z.string().min(8).max(10),
+  nro_passport: z.string().min(8).max(10),
   name: z.string().min(2).max(99),
   surname: z.string().min(2).max(100),
   /* errores personalizados dependiendo del errror */
@@ -16,16 +16,25 @@ export const passengerSchema = z.object({
   /* validaciones con enum */
   genre: z.enum(['male', 'female', 'prefer not to say']),
   email: z.string().email(),
-  phone: z.string().min(5).max(25)
+  phone: z.string().min(5).max(25),
+  createdBy: z.number()
 })
 
 export function validatePassenger(data) {
   const result = passengerSchema.safeParse(data)
-  const { hasErrror, errorMessage, data } = extractValidationData(result)
+
+  const {
+    hasErrror,
+    errorMessage,
+    data: passengerData
+  } = extractValidationData(result)
+
+
+
   return {
     hasErrror,
     errorMessage,
-    data
+    passengerData
   }
 }
 
@@ -34,7 +43,7 @@ export const extractValidationData = (resultValidation) => {
   let data
   const hasErrror = !resultValidation.success
 
-  if (hasErrror) errorMessage = json.parse(resultValidation.error.message)
+  if (hasErrror) errorMessage = JSON.parse(resultValidation.error.message)
 
   if (!hasErrror) data = resultValidation.data
 
