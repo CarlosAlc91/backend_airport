@@ -1,5 +1,11 @@
 import { Router } from 'express'
-import { createCity } from './cities.controller.js'
+import {
+  findAllCities,
+  createCity,
+  findOneCity,
+  updateCity,
+  deleteCity
+} from './cities.controller.js'
 
 export const router = Router()
 
