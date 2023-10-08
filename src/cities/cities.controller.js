@@ -4,7 +4,11 @@ import { validateCity } from "./city.schema.js"
 const cityService = new CityService()
 
 export const findAllCities = async (req, res) => {
-
+ try {
+  
+ } catch (error) {
+  return res.status(500).json(error)
+ }
 }
 
 export const createCity = async (req, res) => {
@@ -32,13 +36,25 @@ export const createCity = async (req, res) => {
 }
 
 export const findOneCity = async (req, res) => {
-
+ try {
+  
+ } catch (error) {
+  return res.status(500).json(error)
+ }
 }
 
 export const updateCity = async (req, res) => {
-
+ try {
+  
+ } catch (error) {
+  return res.status(500).json(error)
+ }
 }
 
 export const deleteCity = async (req, res) => {
-
+ try {
+  
+ } catch (error) {
+  return res.status(500).json(error)
+ }
 }
