@@ -1,7 +1,7 @@
 /* validaciones con zod */
 
-import { json } from 'sequelize'
 import z from 'zod'
+import { extractValidationData } from '../common/utils/extractErrorData.js'
 
 export const passengerSchema = z.object({
   /* validame que sea string y tenga un minimo de 8 caracters y maximo de 10 caracteres */
@@ -38,18 +38,20 @@ export function validatePassenger(data) {
   }
 }
 
-export const extractValidationData = (resultValidation) => {
-  let errorMessage
-  let data
-  const hasErrror = !resultValidation.success
+export function validatePartialPassenger(data) {
+  const result = passengerSchema.partial().safeParse(data)
 
-  if (hasErrror) errorMessage = JSON.parse(resultValidation.error.message)
+  const {
+    hasErrror,
+    errorMessage,
+    data: passengerData
+  } = extractValidationData(result)
 
-  if (!hasErrror) data = resultValidation.data
+
 
   return {
     hasErrror,
     errorMessage,
-    data
+    passengerData
   }
 }

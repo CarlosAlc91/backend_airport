@@ -1,5 +1,4 @@
-import { date } from 'zod'
-import { validatePassenger } from './passengers.schema.js'
+import { validatePartialPassenger, validatePassenger } from './passengers.schema.js'
 import { PassengerService } from './passengers.service.js'
 
 /* instancia de la clase PassengerService */
@@ -65,19 +64,33 @@ export const findPassengerById = async (req, res) => {
 export const updatePassenger = async (req, res) => {
 
   try {
+    //TODO: PUNTO A
+    const { hasErrror, errorMessage, passengerData } = validatePartialPassenger(req.body)
+    //1. obtener el id del passenger
     const { id } = req.params
 
+    //2. buscar el pasajero que se va a actualizar
     const passenger = await passengerService.findOnePassenger(id)
 
+    if (hasErrror) {
+      return res.status(422).json({
+        status: 'error',
+        message: `passenger with id ${id} not found`
+      })
+    }
+    //TODO: PUNTO B
+    //3. validar si el pasajero existe
     if (!passenger) {
       return res.status(404).json({
         status: 'error',
         message: `passenger with id ${id} not found ⚠️`
       })
     }
-
+    //TODO: PUNTO C
+    //4. si existe, se actualiza el passenger
     const passengerUpdated = await passengerService.updatePassenger(passenger, req.body)
 
+    //5. retorno de passenger validado
     return res.json(passengerUpdated)
 
   } catch (error) {
@@ -113,4 +126,4 @@ export const deletePassenger = async (req, res) => {
 }
 
 
-/* clase 9 1:35 */
+/* clase 9 1:45 */
