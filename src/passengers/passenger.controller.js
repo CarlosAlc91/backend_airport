@@ -65,19 +65,21 @@ export const updatePassenger = async (req, res) => {
 
   try {
     //TODO: PUNTO A
+    /* es mas optimo primero hacer la validaacion de los campos y despues hacer la busqueda del passenger*/
     const { hasErrror, errorMessage, passengerData } = validatePartialPassenger(req.body)
+
+    if (hasErrror) {
+      return res.status(422).json({
+        status: 'error',
+        message: errorMessage
+      })
+    }
     //1. obtener el id del passenger
     const { id } = req.params
 
     //2. buscar el pasajero que se va a actualizar
     const passenger = await passengerService.findOnePassenger(id)
 
-    if (hasErrror) {
-      return res.status(422).json({
-        status: 'error',
-        message: `passenger with id ${id} not found`
-      })
-    }
     //TODO: PUNTO B
     //3. validar si el pasajero existe
     if (!passenger) {
