@@ -5,6 +5,12 @@ export const router = Router()
 
 router
   .route('/')
+  .get(findAllCities)
   .post(createCity)
 
-/* clase 9 23:00 */
+
+router
+  .route('/:id')
+  .get(findOneCity)
+  .patch(updateCity)
+  .delete(deleteCity)
