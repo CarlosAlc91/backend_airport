@@ -7,6 +7,8 @@ import {
   deleteCity
 } from './cities.controller.js'
 
+import { validateExistCity } from './city.middleware.js'
+
 export const router = Router()
 
 router
@@ -17,6 +19,7 @@ router
 
 router
   .route('/:id')
-  .get(findOneCity)
+  //anres de que se ejecute findOneCity, se va a ejecutar el middleware
+  .get(validateExistCity, findOneCity)
   .patch(updateCity)
   .delete(deleteCity)
