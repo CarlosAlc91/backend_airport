@@ -62,7 +62,41 @@ export const findOneCity = async (req, res) => {
 
 export const updateCity = async (req, res) => {
   try {
-//1. en schema se crea una validacion 
+    //2. traernos el id del reeq.params
+    const { id } = req.params
+
+    //1. en schema se crea una validacion 
+    const {
+      hasErrror,
+      errorMessage,
+      cityData
+    } = validatePartialCity(req.body)
+
+    //2. condicional para saber is hay erroress
+    if (hasErrror) {
+      return res.status(422).json({
+        status: 'error',
+        massage: errorMessage
+      })
+    }
+
+    //3. buscar a la ciudad
+    const city = cityService.findOneCity(id)
+
+    //4. condicional para saber si hay ciudad o no
+    if (!city) {
+      return res.status(404).json({
+        status: 'error',
+        message: `City with id ${id} not found`
+      })
+    }
+
+    //5. actualiza la ciudad
+    const cityUpdated = await cityService.updateCity(city, cityData)
+
+    //6. retorname la ciudad actualizada
+    return res.status(200).json(cityUpdated)
+
   } catch (error) {
     return res.status(500).json(error)
   }
