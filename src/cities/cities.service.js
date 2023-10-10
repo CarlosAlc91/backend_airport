@@ -21,7 +21,9 @@ export class CityService {
       where: {
         id,
         status: true
-      }
+      },
+      //trae la informacion mas no el modelo, pero no se podra hacer city.update
+      //raw: true
     })
   }
 
