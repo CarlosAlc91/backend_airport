@@ -22,4 +22,4 @@ router
   //anres de que se ejecute findOneCity, se va a ejecutar el middleware
   .get(validateExistCity, findOneCity)
   .patch(updateCity)
-  .delete(deleteCity)
+  .delete(validateExistCity, deleteCity)
