@@ -6,7 +6,7 @@ import { extractValidationData } from '../common/utils/extractErrorData.js'
 export const passengerSchema = z.object({
   /* validame que sea string y tenga un minimo de 8 caracters y maximo de 10 caracteres */
   nro_passport: z.string().min(8).max(10),
-  name: z.string().min(2).max(999),
+  name: z.string().min(2).max(99),
   surname: z.string().min(2).max(100),
   /* errores personalizados dependiendo del errror */
   birthdate: z.string({

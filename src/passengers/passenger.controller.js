@@ -38,12 +38,13 @@ export const createPassesnger = async (req, res) => {
 
   } catch (error) {
 
-    if (error.parent.code === '22001') {
-      return res.status(400).json({
-        status: 'error',
-        message: 'Information received is too long'
-      })
-    }
+    /*  if (error.parent.code === '22001') {
+       return res.status(400).json({
+         status: 'error',
+         message: 'Information received is too long'
+       })
+     } */
+
     return res.status(500).json(error)
   }
 }
