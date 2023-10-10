@@ -35,7 +35,15 @@ export const createPassesnger = async (req, res) => {
     const passanger = await passengerService.createPassenger(passengerData)
     /* siempre a las respuestas se les pone un return, cuando se tienen 2 res en el mismo ciclo la app va a fallar porque no se pueden enviar 2 al mismo tiemopo */
     return res.status(201).json(passanger)
+
   } catch (error) {
+
+    if (error.parent.code === '22001') {
+      return res.status(400).json({
+        status: 'error',
+        message: 'Information received is too long'
+      })
+    }
     return res.status(500).json(error)
   }
 }
