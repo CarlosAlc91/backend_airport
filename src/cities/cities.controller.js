@@ -1,5 +1,5 @@
 import { CityService } from "./cities.service.js"
-import { validateCity } from "./city.schema.js"
+import { validateCity, validatePartialCity } from "./city.schema.js"
 
 const cityService = new CityService()
 
@@ -66,9 +66,10 @@ export const findOneCity = async (req, res) => {
 
 export const updateCity = async (req, res) => {
   try {
-    //2. traernos el id del reeq.params
-    const { id } = req.params
-
+    /* //2. traernos el id del reeq.params
+    const { id } = req.params */
+    //agregamos el middleware
+    const { city } = req
     //1. en schema se crea una validacion 
     const {
       hasErrror,
@@ -84,7 +85,9 @@ export const updateCity = async (req, res) => {
       })
     }
 
-    //3. buscar a la ciudad
+
+
+    /* //3. buscar a la ciudad
     const city = cityService.findOneCity(id)
 
     //4. condicional para saber si hay ciudad o no
@@ -93,7 +96,7 @@ export const updateCity = async (req, res) => {
         status: 'error',
         message: `City with id ${id} not found`
       })
-    }
+    } */
 
     //5. actualiza la ciudad
     const cityUpdated = await cityService.updateCity(city, cityData)
@@ -102,6 +105,7 @@ export const updateCity = async (req, res) => {
     return res.status(200).json(cityUpdated)
 
   } catch (error) {
+    console.log(error)
     return res.status(500).json(error)
   }
 }

@@ -48,7 +48,7 @@ export const validatePartialCity = (data) => {
     hasErrror,
     errorMessage,
     data: dataCity
-  } = extractValidationData()
+  } = extractValidationData(result)
 
   //3. retorno de los resultados
   return {
