@@ -41,7 +41,7 @@ export const createCity = async (req, res) => {
 
 export const findOneCity = async (req, res) => {
   try {
-    //1. recibir el id que viene de la req.params
+    /* //1. recibir el id que viene de la req.params
     const { id } = req.params
     //2.
     const city = await cityService.findOneCity(id)
@@ -51,7 +51,11 @@ export const findOneCity = async (req, res) => {
         status: 'error',
         message: `City with id ${id} not found`
       })
-    }
+    } */
+
+    //agregamos la ciudad destructurada del middleware
+    const { city } = req
+
     //4. retorna una respuesta con el status 200 y un objeto jsson con la ciudad encontrada
     return res.status(200).json(city)
 
