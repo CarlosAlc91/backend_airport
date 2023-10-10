@@ -22,6 +22,9 @@ export const validateExistCity = async (req, res, next) => {
     })
   }
 
-  //7. sigue a la siguiente ruta
+  //7. modificar el objeto req
+  req.city = city
+
+  //8. sigue a la siguiente ruta
   next()
 }
