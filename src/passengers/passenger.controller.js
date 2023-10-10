@@ -126,6 +126,3 @@ export const deletePassenger = async (req, res) => {
     return res.status(500).json(error)
   }
 }
-
-
-/* clase 9 1:45 */

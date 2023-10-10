@@ -17,9 +17,12 @@ router
   .post(createCity)
 
 
+
 router
+  .use('/:id', validateExistCity)
   .route('/:id')
   //anres de que se ejecute findOneCity, se va a ejecutar el middleware
-  .get(validateExistCity, findOneCity)
-  .patch(validateExistCity, updateCity)
-  .delete(validateExistCity, deleteCity)
+  .get(findOneCity)
+  .patch(updateCity)
+  .delete(deleteCity)
+
