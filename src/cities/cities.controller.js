@@ -108,7 +108,7 @@ export const updateCity = async (req, res) => {
 
 export const deleteCity = async (req, res) => {
   try {
-    //1. traer el id de la req.params
+    /* //1. traer el id de la req.params
     const { id } = req.params
 
     //2. busqueda de la ciudad
@@ -120,8 +120,9 @@ export const deleteCity = async (req, res) => {
         status: 'error',
         message: `City with id ${id} not found`
       })
-    }
-
+    } */
+    // nos traemos la city del middleware
+    const { city } = req
     //4. cambiar el status de la ciudad a eliminar
     // el city service, recibe la  ciudad, se actualiza y cambia el status a false
     await cityService.deleteCity(city)
