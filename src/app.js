@@ -7,6 +7,7 @@ const app = express()
 //middleware
 app.use(express.json())
 //TODO: REFACTORIZAR
+//morgan siempre va antes de las rutas
 app.use(morgan('dev'))
 app.use('/api/v1', router)
 
