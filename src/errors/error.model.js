@@ -1,7 +1,7 @@
 /* creacion de modelo */
 //1. importat datatypes
 import { DataTypes } from "sequelize"
-import sequelize from "../config/database/database"
+import sequelize from "../config/database/database.js"
 
 //2. creacion de modelo
 const Error = sequelize.define('error', {
