@@ -1,5 +1,8 @@
 //1. import
 import { envs } from "../config/environments/environments.js"
+//6. importar modelo
+import Error from "./error.model.js"
+
 
 //2. create functions
 /* error en desarrollo */
@@ -15,6 +18,12 @@ const sendErrorDev = (err, res) => {
 
 /* error en produccion */
 const sendErrorProd = async (err, res) => {
+  //7. await del error que tenemos en error.model
+  await Error.create({
+    status: err.status,
+    message: err.message,
+    stack: err.stack
+  })
   //5. si el error es operacional
   if (err.isOperational) {
     //se envia una respuesta con el status del error en un objeto json con el status y el mensaje
