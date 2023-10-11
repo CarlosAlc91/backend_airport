@@ -40,10 +40,8 @@ export const findPassengerById = catchAsync(async (req, res, next) => {
   const passanger = await passengerService.findOnePassenger(id)
 
   if (!passanger) {
-    return res.status(404).json({
-      status: "error",
-      message: `passenger with ${id} not found ⚠️`
-    })
+    //retorna la clase AppError con el mensaje y el codigo
+    return next(new AppError(`passenger with id ${id} not found`, 404))
   }
 
   res.json(passanger)
