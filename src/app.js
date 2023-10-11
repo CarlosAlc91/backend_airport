@@ -1,5 +1,6 @@
 import express from "express"
 import { router } from "./routes/routes.js"
+import { AppError } from "./errors/appError.js"
 const app = express()
 
 //middleware
@@ -15,14 +16,19 @@ app.all('*', (req, res, next) => {
 
   /* implementacion de errors middleware */
   //1. creacion de instancia de la clase error
-  const err = new Error(`cannot find route ${req.originalUrl}`)
+  /* const err = new Error(`cannot find route ${req.originalUrl}`)
 
   //2. devolucion de la clase instanciada = devuelve un objeto
   err.status = 'error'
   err.statusCode = 404
 
   //3. next para que el middleware siga avanzando y se agraga err para que pueda ser utilizado 
-  next(err)
+  next(err) */
+
+  /* USO DE LA CLASE APPERROR DE appError.js */
+  //1. importacion de la clase appError.js
+  //2. se hacer un next para que dentro del next se instancie la clase appError la clase recibe message y statusCode
+  next(new AppError(`cannot find route ${req.originalUrl}`, 404))
 
 })
 
