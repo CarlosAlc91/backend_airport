@@ -1,7 +1,7 @@
 /* middleware es una funcion que recibe request, response y next */
 
 import { CityService } from "./cities.service.js"
-import { catchAsync } from '../errors/index.js'
+import { AppError, catchAsync } from '../errors/index.js'
 
 //3. instanciar la ciudad
 const cityService = new CityService()
@@ -17,10 +17,9 @@ export const validateExistCity = catchAsync(async (req, res, next) => {
 
   //6. validar si la ciudad existe o no
   if (!city) {
-    return res.status(404).json({
-      status: 'error',
-      message: `City with id ${id} not found`
-    })
+
+    //retornamos la clase new AppError que importamos de catchAsync
+    return next(new AppError(`City with id ${id} not found`, 404))
   }
 
   //7. modificar el objeto req
