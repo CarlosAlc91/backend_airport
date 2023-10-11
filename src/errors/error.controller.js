@@ -2,6 +2,12 @@
 import { envs } from "../config/environments/environments.js"
 //6. importar modelo
 import Error from "./error.model.js"
+//11. importat apperror
+import { AppError } from './appError.js'
+
+//10. funcion handlerCastError22001 con return implicito
+const handlerCastError22001 = () =>
+  new AppError('Value too long for type on attribute', 400)
 
 
 //2. create functions
@@ -24,7 +30,7 @@ const sendErrorProd = async (err, res) => {
     message: err.message,
     stack: err.stack
   })
-  //5. si el error es operacional
+  //5. validacion si el error es operacional
   if (err.isOperational) {
     //se envia una respuesta con el status del error en un objeto json con el status y el mensaje
     res.status(err.statusCode).json({
@@ -54,7 +60,11 @@ export const globalErrorHandler = (err, req, res, next) => {
   }
 
   if (envs.NODE_ENV === 'production') {
-    sendErrorProd(err, res)
+    //8. creacion de vatiable error
+    let error = err
+    //9. condicional para error 22001
+    if (err.parent?.code === '22001') error = handlerCastError22001()
+    sendErrorProd(error, res)
   }
 
   /* res.status(err.statusCode).json({
