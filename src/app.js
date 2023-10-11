@@ -6,10 +6,11 @@ const app = express()
 
 //middleware
 app.use(express.json())
-app.use('/api/v1', router)
-
 //TODO: REFACTORIZAR
 app.use(morgan('dev'))
+app.use('/api/v1', router)
+
+
 
 /* validacion sino se encuntran rutas de routes.js siga buscando */
 app.all('*', (req, res, next) => {
