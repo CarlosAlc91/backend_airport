@@ -4,7 +4,7 @@ import { envs } from "../config/environments/environments.js"
 //2. create functions
 /* error en desarrollo */
 const sendErrorDev = (err, res) => {
-  //4. 
+  //4. se envia una respuesta con status => error con el codigo del status en un objeto json
   res.status(err.statusCode).json({
     status: err.status,
     message: err.message,
@@ -15,7 +15,21 @@ const sendErrorDev = (err, res) => {
 
 /* error en produccion */
 const sendErrorProd = async (err, res) => {
-
+  //5. si el error es operacional
+  if (err.isOperational) {
+    //se envia una respuesta con el status del error en un objeto json con el status y el mensaje
+    res.status(err.statusCode).json({
+      status: err.status,
+      message: err.message
+    })
+  } else {
+    //error de programcion u otro error desconocido
+    console.log('Error 🧨', err)
+    res.status(500).json({
+      status: 'failed',
+      message: 'Something went wrong'
+    })
+  }
 }
 
 export const globalErrorHandler = (err, req, res, next) => {
