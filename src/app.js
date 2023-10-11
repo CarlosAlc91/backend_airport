@@ -8,10 +8,22 @@ app.use('/api/v1', router)
 
 /* validacion sino se encuntran rutas de routes.js siga buscando */
 app.all('*', (req, res, next) => {
-  return res.status(404).json(({
+  /* return res.status(404).json(({
     status: 'error',
     message: `cannot find route ${req.originalUrl}`
-  }))
+  })) */
+
+  /* implementacion de errors middleware */
+  //1. creacion de instancia de la clase error
+  const err = new Error(`cannot find route ${req.originalUrl}`)
+
+  //2. devolucion de la clase instanciada = devuelve un objeto
+  err.status = 'error'
+  err.statusCode = 404
+
+  //3. next para que el middleware siga avanzando y se agraga err para que pueda ser utilizado 
+  next(err)
+
 })
 
 //basurero = aqui queda la basura (errores)
