@@ -9,11 +9,13 @@ app.use('/api/v1', router)
 
 /* validacion sino se encuntran rutas de routes.js siga buscando */
 app.all('*', (req, res, next) => {
+  /* METODO 1 PARA ENVIO DE ERRORES */
   /* return res.status(404).json(({
     status: 'error',
     message: `cannot find route ${req.originalUrl}`
   })) */
 
+  /* METODO 2 PARA ENVIO DE ERRORES */
   /* implementacion de errors middleware */
   //1. creacion de instancia de la clase error
   /* const err = new Error(`cannot find route ${req.originalUrl}`)
@@ -25,6 +27,7 @@ app.all('*', (req, res, next) => {
   //3. next para que el middleware siga avanzando y se agraga err para que pueda ser utilizado 
   next(err) */
 
+  /* METODO 3 PARA ENVIO DE ERROES */
   /* USO DE LA CLASE APPERROR DE appError.js */
   //1. importacion de la clase appError.js
   //2. se hacer un next para que dentro del next se instancie la clase appError la clase recibe message y statusCode
