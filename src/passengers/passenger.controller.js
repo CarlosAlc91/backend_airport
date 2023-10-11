@@ -1,4 +1,5 @@
-import { catchAsync } from '../errors/catchAsync.js'
+
+import { AppError, catchAsync } from '../errors/index.js'
 import { validatePartialPassenger, validatePassenger } from './passengers.schema.js'
 import { PassengerService } from './passengers.service.js'
 
