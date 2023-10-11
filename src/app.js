@@ -1,11 +1,15 @@
 import express from "express"
 import { router } from "./routes/routes.js"
 import { AppError } from "./errors/appError.js"
+import morgan from "morgan"
 const app = express()
 
 //middleware
 app.use(express.json())
 app.use('/api/v1', router)
+
+//TODO: REFACTORIZAR
+app.use(morgan('dev'))
 
 /* validacion sino se encuntran rutas de routes.js siga buscando */
 app.all('*', (req, res, next) => {
