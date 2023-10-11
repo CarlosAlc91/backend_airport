@@ -2,13 +2,19 @@ import express from "express"
 import { router } from "./routes/routes.js"
 import { AppError } from "./errors/appError.js"
 import morgan from "morgan"
+import { envs } from "./config/environments/environments.js"
+
 const app = express()
 
 //middleware
 app.use(express.json())
 //TODO: REFACTORIZAR
 //morgan siempre va antes de las rutas
-app.use(morgan('dev'))
+//si node_env es igual a 'development' se ejecuta morgan en desarrollo
+if (envs.NODE_ENV === 'development') {
+
+  app.use(morgan('dev'))
+}
 app.use('/api/v1', router)
 
 
