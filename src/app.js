@@ -4,6 +4,7 @@ import { AppError } from "./errors/appError.js"
 import morgan from "morgan"
 import { envs } from "./config/environments/environments.js"
 import { globalErrorHandler } from "./errors/error.controller.js"
+import { enableCors } from "./config/plugins/cors.plugin.js"
 
 const app = express()
 
@@ -17,8 +18,8 @@ if (envs.NODE_ENV === 'development') {
   app.use(morgan('dev'))
 }
 
-//cors
-app.use(cors())
+//importando enableCors de plugins
+enableCors()
 app.use('/api/v1', router)
 
 
