@@ -9,6 +9,9 @@ import { AppError } from './appError.js'
 const handlerCastError22001 = () =>
   new AppError('Value too long for type on attribute', 400)
 
+//11. funcion jpara errores 23505
+const handlerCastError23505 = () =>
+  new AppError('Duplicate value: please enter another value', 400)
 
 //2. create functions
 /* error en desarrollo */
@@ -63,8 +66,13 @@ export const globalErrorHandler = (err, req, res, next) => {
   if (envs.NODE_ENV === 'production') {
     //8. creacion de vatiable error
     let error = err
+
     //9. condicional para error 22001
     if (err.parent?.code === '22001') error = handlerCastError22001()
+
+    //12. validacion para error 23505
+    if (err.parent?.code === '23505') error = handlerCastError23505()
+
     sendErrorProd(error, res)
   }
 
