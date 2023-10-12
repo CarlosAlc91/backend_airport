@@ -16,6 +16,9 @@ if (envs.NODE_ENV === 'development') {
 
   app.use(morgan('dev'))
 }
+
+//cors
+app.use(cors())
 app.use('/api/v1', router)
 
 
