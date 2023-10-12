@@ -8,6 +8,9 @@ import { enableCors } from "./config/plugins/cors.plugin.js"
 
 const app = express()
 
+//2. se  va a agregar importaar a enableCors
+const ACCEPTED_ORIGINS = ['http://localhost:8080', 'http://localhost:4200', '']
+
 //middleware
 app.use(express.json())
 //TODO: REFACTORIZAR
@@ -18,8 +21,8 @@ if (envs.NODE_ENV === 'development') {
   app.use(morgan('dev'))
 }
 
-//importando enableCors de plugins
-enableCors()
+//1. importando enableCors de plugins
+enableCors(app, ACCEPTED_ORIGINS)
 app.use('/api/v1', router)
 
 
