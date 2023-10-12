@@ -1,10 +1,10 @@
 import express from "express"
 import { router } from "./routes/routes.js"
 import { AppError } from "./errors/appError.js"
-import morgan from "morgan"
 import { envs } from "./config/environments/environments.js"
 import { globalErrorHandler } from "./errors/error.controller.js"
 import { enableCors } from "./config/plugins/cors.plugin.js"
+import { enableMorgan } from "./config/plugins/morgan.plugin.js"
 
 const app = express()
 
@@ -18,7 +18,7 @@ app.use(express.json())
 //si node_env es igual a 'development' se ejecuta morgan en desarrollo
 if (envs.NODE_ENV === 'development') {
 
-  app.use(morgan('dev'))
+  enableMorgan(app)
 }
 
 //1. importando enableCors de plugins
