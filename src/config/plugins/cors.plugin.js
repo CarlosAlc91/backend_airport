@@ -9,7 +9,7 @@ export const enableCors = (app, acceptedOrigins) => {
     //4. despues de crear accepted_origins en app.js
     origin: (origin, callback) => {
       //5. si acceptedOrigins incluye origin voy a retornar una funcion callback que va a devolver un null y true
-      if (acceptedOrigins.include(origin)) {
+      if (acceptedOrigins.includes(origin)) {
         return callback(null, true)
       }
 
