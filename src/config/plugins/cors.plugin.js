@@ -12,6 +12,15 @@ export const enableCors = (app, acceptedOrigins) => {
       if (acceptedOrigins.include(origin)) {
         return callback(null, true)
       }
+
+      //6. si el origen no se encuntra se va a retornar el callback con el null y el true
+      if (!origin) {
+        return callback(null, true)
+      }
+
+      //7. en caso de que no sea mi servidor o un servidor que no se acepte
+      // se retorna el callback con un new Error
+      return callback(new Error('Not allowed by CORS'))
     }
   }))
 }
