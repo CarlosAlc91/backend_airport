@@ -4,16 +4,7 @@ import sequelize from "../config/database/database.js"
 
 //2. create model
 const Flight = sequelize.define('flight', {
-  /* flight_id integer [pk, increment]
-  //id de las ciudades
-  origin_id integer [not null]
-  destination_id integer [not null]
-  plane_id integer [not null]
-  departure_time timestamp [not null]
-  check_in timestamp
-
-  status flight_status [default: 'pending'] */
-
+  
   id: {
     primaryKey: true,
     allowNull: false,

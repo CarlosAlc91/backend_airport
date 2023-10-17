@@ -1,4 +1,13 @@
 import { Router } from "express"
+import {
+  findAllFlights,
+  createFlight,
+  findOneFlight,
+  updateFlight,
+  deleteFlight
+} from './flights.controller.js'
+
+import { validateExistFlight } from './flights.middleware.js'
 
 export const router = Router()
 
@@ -8,7 +17,8 @@ router
   .post(createFlight)
 
 router
-  .route('/:id/')
+  .use('/:id', validateExistFlight)
+  .route('/:id')
   .get(findOneFlight)
-  .patch(createFlight)
+  .patch(updateFlight)
   .delete(deleteFlight)

@@ -57,6 +57,6 @@ export const validatePartialFlight = (data) => {
   return {
     hasErrror,
     errorMessage,
-    dataFlight
+    data: dataFlight
   }
 }

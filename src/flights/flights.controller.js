@@ -1,7 +1,7 @@
 //1. importacion de index.js para la captura de errroes
 import { catchAsync } from "../errors/index.js"
-import { validateFlight, validatePartialFlight } from "./flights.schema.js"
 import { FlightService } from "./flights.service.js"
+import { validateFlight, validatePartialFlight } from "./flights.schema.js"
 
 
 const flightService = new FlightService()
@@ -41,7 +41,9 @@ export const findOneFlight = catchAsync(async (req, res) => {
 
 export const updateFlight = catchAsync(async (req, res) => {
 
+  const { flight } = req
   //1. en schema se crea una validacion
+
   const {
     hasErrror,
     errorMessage,

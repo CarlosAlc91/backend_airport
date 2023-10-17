@@ -1,4 +1,4 @@
-import Flight from "./flights.model"
+import Flight from "./flights.model.js"
 
 export class FlightService {
   async findAllFlights() {
@@ -25,7 +25,7 @@ export class FlightService {
   async updateFlight(flight, data) {
     return await flight.update(data)
   }
-  
+
   async findAllFlights(flight) {
     return await flight.update({
       status: false
