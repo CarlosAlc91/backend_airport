@@ -4,7 +4,7 @@ import sequelize from "../config/database/database.js"
 
 //2. create model
 const Flight = sequelize.define('flight', {
-  
+
   id: {
     primaryKey: true,
     allowNull: false,
@@ -23,18 +23,19 @@ const Flight = sequelize.define('flight', {
     field: 'destination_id'
   },
   planeId: {
-    allowNull: false,
     type: DataTypes.INTEGER,
+    allowNull: false,
     field: 'plane_id'
   },
   departureTime: {
-    allowNull: false,
     type: DataTypes.DATE,
+    allowNull: false,
     field: 'departure_time'
   },
   checkIn: {
     allowNull: false,
-    type: DataTypes.DATE
+    type: DataTypes.DATE,
+    field: 'check_in'
   },
   /* 
   Enum flight_status {
