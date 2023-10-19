@@ -14,7 +14,7 @@ const flightSchema = z.object({
     check_in timestamp
   
     status flight_status [default: 'pending'] */
-  originId: z.number(),
+  originId: z.string(),
   destinationId: z.number(),
   planeId: z.number(),
   departureTime: z.string(),
