@@ -7,7 +7,7 @@ import {
   deletePlane
 } from './planes.controller.js'
 
-import { validateExistPlane } from './planes.middleware.js'
+import { validatePlaneId } from './planes.middleware.js'
 
 export const router = Router()
 
@@ -17,7 +17,7 @@ router
   .post(createPlane)
 
 router
-  .use('/:id', validateExistPlane)
+  .use('/:id', validatePlaneId)
   .route('/:id')
   .get(findOnePlane)
   .patch(updatePlane)

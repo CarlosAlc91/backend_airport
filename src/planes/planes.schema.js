@@ -16,7 +16,7 @@ const planeSchema = z.object({
   planeNumber: z.number(),
   model: z.string().min(3).max(60),
   maxCapacity: z.number(),
-  airline: z.string.min(3).max(60),
+  airline: z.string().min(3).max(60),
   status: z.boolean()
 })
 
@@ -49,7 +49,7 @@ export const validatePartialPlane = (data) => {
     hasErrror,
     errorMessage,
     data: dataPlane
-  } = extractValidationData(data)
+  } = extractValidationData(result)
 
   //3. retorno de los resultados
   return {

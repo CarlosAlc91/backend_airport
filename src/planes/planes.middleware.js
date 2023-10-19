@@ -1,5 +1,5 @@
 //1. importacion de PlaneService e index.js
-import { catchAsync } from "../errors/index.js"
+import { AppError, catchAsync } from "../errors/index.js"
 import { PlaneService } from "./planes.service.js"
 
 //2. instanciar el plane
@@ -15,6 +15,12 @@ export const validatePlaneId = catchAsync(async (req, res, next) => {
 
   //6. validar si el plane existe
   if (!plane) {
-
+    return next(new AppError(`Plane with id ${id} not found`, 404))
   }
+
+  //7. modificacion del objeto req
+  req.plane = plane
+
+  //8. sigue a la siguiente ruta
+  next()
 })
