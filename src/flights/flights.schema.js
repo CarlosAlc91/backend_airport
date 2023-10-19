@@ -17,8 +17,9 @@ const flightSchema = z.object({
   originId: z.number(),
   destinationId: z.number(),
   planeId: z.number(),
-  departureTime: z.date(),
-  checkIn: z.date()
+  departureTime: z.string(),
+  checkIn: z.string(),
+  status: z.enum(['pending', 'inProgress', 'done', 'cancelled', 'delayed'])
 })
 
 //3. funciones pra validar

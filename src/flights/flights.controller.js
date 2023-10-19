@@ -47,7 +47,7 @@ export const updateFlight = catchAsync(async (req, res) => {
   const {
     hasErrror,
     errorMessage,
-    flightData
+    dataFlight
   } = validatePartialFlight(req.body)
 
   //2. condicional para saber si hay erroes
@@ -59,7 +59,7 @@ export const updateFlight = catchAsync(async (req, res) => {
   }
 
   //3. se actualiza el flight
-  const flightUpdated = await flightService.updateFlight(flight, flightData)
+  const flightUpdated = await flightService.updateFlight(flight, dataFlight)
 
   //4. retorname el flught actualizado
   return res.status(200).json(flightUpdated)
